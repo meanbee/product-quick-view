@@ -1,0 +1,3 @@
+# Quick view plugin
+
+Readme file...

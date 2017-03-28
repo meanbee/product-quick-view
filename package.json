@@ -1,0 +1,14 @@
+{
+    "name": "product-preview-plugin",
+    "version": "1.0.0",
+    "scripts": {
+        "scss": "node-sass -o dist/css src/scss",
+        "autoprefixer": "postcss -u autoprefixer -r dist/css/*",
+        "build:css": "npm run scss && npm run autoprefixer"
+    },
+    "devDependencies": {
+        "autoprefixer": "^6.4.0",
+        "node-sass": "^3.8.0",
+        "postcss-cli": "^2.5.2"
+    }
+}

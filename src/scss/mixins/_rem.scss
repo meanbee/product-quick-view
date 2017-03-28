@@ -1,0 +1,69 @@
+/// Mixin to output px or rem value depending on application file for a given property.
+///
+/// @group General
+/// @access public
+///
+/// @param {String} $property - Property name to output
+/// @param {Length} $values - Values to assign to the property
+///
+/// @example scss - Usage
+/// .foo {
+///   @include rem(font-size, 100px);
+/// }
+///
+/// .bar {
+///   @include rem(font-size, 100px);
+/// }
+///
+/// @example css - CSS output within application.scss
+/// .foo {
+///   font-size: 6.25rem;
+/// }
+///
+/// @example css - CSS output within application-ie8.scss
+/// .bar {
+///   font-size: 100px;
+/// }
+
+@mixin rem($property, $values) {
+    // Create a couple of empty lists as output buffers.
+    $font-size: $base-font-size;
+    $px-values: ();
+    $rem-values: ();
+
+    // Loop through the $values list
+    @each $value in $values {
+        // For each property value, if it's in rem or px, derive both rem and
+        // px values for it and add those to the end of the appropriate buffer.
+        // Ensure all pixel values are rounded to the nearest pixel.
+        @if $value == 0 or $value == '0px' {
+            // 0 -- use it without a unit
+            $px-values: join($px-values, 0);
+            $rem-values: join($rem-values, 0);
+        } @else if type-of($value) == number and not unitless($value) and (unit($value) == px) {
+            // px value given - calculate rem value from font-size
+            $new-rem-value: $value / $font-size;
+            $px-values: join($px-values, round($value));
+            $rem-values: join($rem-values, #{$new-rem-value}rem);
+        } @else if type-of($value) == number and not unitless($value) and (unit($value) == '%') {
+            // % value given - don't add px or rem
+            $px-values: join($px-values, #{$value});
+            $rem-values: join($rem-values, #{$value});
+        } @else if $value == auto {
+            // auto - don't add px or rem
+            $px-values: join($px-values, auto);
+            $rem-values: join($rem-values, auto);
+        } @else {
+            // unitless value - use those directly as rem and calculate the px-fallback
+            $px-values: join($px-values, round($value * $font-size));
+            $rem-values: join($rem-values, #{$value}rem);
+        }
+    }
+
+    // output the converted rules
+    @if ($lt-ie9) {
+        #{$property}: $px-values;
+    } @else {
+        #{$property}: $rem-values;
+    }
+}

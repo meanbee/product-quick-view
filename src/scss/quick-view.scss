@@ -1,0 +1,116 @@
+@import 'mixins/before-ie-9';
+@import 'mixins/breakpoint';
+@import 'mixins/clearfix';
+@import 'mixins/rem';
+@import 'animations/modalAnimation';
+@import 'config';
+
+// ------------------------------------------------
+// Cross browser support settings
+// ------------------------------------------------
+$lt-ie10: false !default;
+$lt-ie9: false !default;
+$media-queries: true;
+
+// 
+// Product preview component styles
+//
+.quick-view {
+    @include rem(bottom, 5px);
+    position: absolute;
+    width: 100%;
+}
+
+.quick-view-button {
+    display: none;
+
+    @media screen and (min-width: $breakpoint-medium) {
+        @include rem(padding, 10px 20px);
+        background-color: map-get($brand-color, 'black');
+        color: map-get($brand-color, 'white');
+        display: inline-block;
+        float: right;
+        font-weight: 400;
+        opacity: 0;
+        text-transform: uppercase;
+        transition: opacity .5s ease-out;
+    }
+}
+
+.quick-view-modal {
+    display: none;
+
+    @media screen and (min-width: $breakpoint-medium) {
+        bottom: 0;
+        left: 0;
+        position: fixed;
+        right: 0;
+        top: 0;
+        z-index: 10;
+
+        &.is-active {
+            display: block;
+        }
+    }
+}
+
+.quick-view-canvas {
+    @include rem(max-width, 800px);
+    margin: 0 auto;
+}
+
+.quick-view-canvas-inner {
+    @include rem(max-height, 400px);
+    @include clearfix();
+    background-color: map-get($brand-color, 'white');
+    position: relative;
+}
+
+.quick-view-image,
+.quick-view-info {
+    float: left;
+    width: 50%;
+}
+
+.quick-view-info {
+    @include rem(padding, 40px);
+}
+
+.quick-view-close {
+    @include rem(height, 30px);
+    @include rem(padding, 20px);
+    @include rem(right, 30px);
+    @include rem(top, 20px);
+    @include rem(width, 30px);
+    position: absolute;
+
+    &:before,
+    &:after {
+        @include rem(border-radius, 80px);
+        @include rem(height, 4px);
+        @include rem(width, 30px);
+        background: map-get($brand-color, 'black');
+        content: '';
+        left: 0;
+        position: absolute;
+        top: 50%;
+    }
+
+    &:before {
+        transform: rotate3d(0, 0, 1, 45deg);
+    }
+
+    &:after {
+        transform: rotate3d(0, 0, 1, -45deg);
+    }
+}
+
+.quick-view-overlay {
+    background-color: rgba(0, 0, 0, .5);
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: -10;
+} 

@@ -1,0 +1,105 @@
+// ------------------------------------------------
+// Cross browser support settings
+// ------------------------------------------------
+$lt-ie10: false !default;
+$lt-ie9: false !default;
+$media-queries: true;
+
+@import 'mixins/before-ie-9';
+@import 'mixins/breakpoint';
+@import 'mixins/clearfix';
+@import 'mixins/rem';
+@import 'config';
+
+// 
+// Base elements
+// 
+*,
+*:before,
+*:after {
+    box-sizing: border-box;
+}
+
+html,
+body {
+    color: #636363;
+    font: 300 14px/1.5 $base-font-family;
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-font-smoothing: antialiased;
+    height: 100%;
+    margin: 0;
+    text-rendering: optimizeLegibility;
+}
+
+ul,
+ol {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+img {
+    height: auto;
+    max-width: 100%;
+}
+
+button {
+    @include rem(font-size, 14px);
+    @include rem(padding, 10px);
+    background-color: map-get($brand-color, 'darkGrey');
+    border: 0;
+    color: map-get($brand-color, 'white');
+    font-family: $base-font-family;
+    line-height: 1;
+    text-align: center;
+    text-transform: uppercase;
+    width: 100%;
+
+    span {
+        vertical-align: middle;
+    }
+
+    &:hover,
+    &:active {
+        background-color: map-get($brand-color, 'black');
+        transition: all .5s ease-in-out
+    }
+
+    &:focus {
+        outline: none;
+    }
+}
+
+// 
+// Products page 
+// 
+.products {
+    @include clearfix();
+    column-count: 3;
+
+    li {
+        position: relative;
+        text-align: center;
+
+        &:hover {
+            .quick-view-button {
+                opacity: 1;
+            }
+        }
+    }
+}
+
+.container,
+header {
+    @include rem(padding, 0 10px);
+    @include rem(max-width, 850px);
+    margin: 0 auto;
+}
+
+.container {
+    @include rem(margin, 20px auto 40px auto);
+}
+
+.logo {
+    border-bottom: 1px solid map-get($brand-color, 'lightGrey');
+}
