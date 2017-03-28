@@ -41,6 +41,7 @@ $media-queries: true;
     display: none;
 
     @media screen and (min-width: $breakpoint-medium) {
+        align-items: center;
         bottom: 0;
         left: 0;
         position: fixed;
@@ -49,7 +50,7 @@ $media-queries: true;
         z-index: 10;
 
         &.is-active {
-            display: block;
+            display: flex;
         }
     }
 }
@@ -57,6 +58,7 @@ $media-queries: true;
 .quick-view-canvas {
     @include rem(max-width, 800px);
     margin: 0 auto;
+    position: relative;
 }
 
 .quick-view-canvas-inner {

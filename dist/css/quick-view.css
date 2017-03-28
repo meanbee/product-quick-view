@@ -1,3 +1,45 @@
+.modalAnimation {
+  -webkit-animation-duration: .6s;
+          animation-duration: .6s;
+  -webkit-animation-name: zoomIn;
+          animation-name: zoomIn;
+  height: 400px; }
+
+@-webkit-keyframes zoomIn {
+  from {
+    -webkit-transform: translateY(-70%);
+            transform: translateY(-70%); }
+  to {
+    -webkit-transform: translateY(0%);
+            transform: translateY(0%); } }
+
+@keyframes zoomIn {
+  from {
+    -webkit-transform: translateY(-70%);
+            transform: translateY(-70%); }
+  to {
+    -webkit-transform: translateY(0%);
+            transform: translateY(0%); } }
+
+.canvasAnimation {
+  -webkit-animation-name: slideDown;
+          animation-name: slideDown;
+  -webkit-animation-duration: .5s;
+          animation-duration: .5s;
+  overflow: hidden; }
+
+@-webkit-keyframes slideDown {
+  from {
+    height: 0; }
+  to {
+    height: 400px; } }
+
+@keyframes slideDown {
+  from {
+    height: 0; }
+  to {
+    height: 400px; } }
+
 .quick-view {
   bottom: 0.35714rem;
   position: absolute;
@@ -22,6 +64,9 @@
   display: none; }
   @media screen and (min-width: 770px) {
     .quick-view-modal {
+      -webkit-box-align: center;
+          -ms-flex-align: center;
+              align-items: center;
       bottom: 0;
       left: 0;
       position: fixed;
@@ -29,11 +74,14 @@
       top: 0;
       z-index: 10; }
       .quick-view-modal.is-active {
-        display: block; } }
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex; } }
 
 .quick-view-canvas {
   max-width: 57.14286rem;
-  margin: 0 auto; }
+  margin: 0 auto;
+  position: relative; }
 
 .quick-view-canvas-inner {
   max-height: 28.57143rem;

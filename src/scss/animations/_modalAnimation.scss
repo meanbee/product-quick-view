@@ -1,0 +1,32 @@
+
+.modalAnimation {
+  animation-duration: .6s;
+  animation-name: zoomIn;
+  height: 400px;
+}
+
+@keyframes zoomIn {
+    from {
+        transform: translateY(-70%);
+    }
+
+    to {
+        transform: translateY(0%);
+    }
+}
+
+.canvasAnimation {
+    animation-name: slideDown;
+    animation-duration: .5s;
+    overflow: hidden;
+}
+
+@keyframes slideDown {
+    from {
+        height: 0;
+    }
+
+    to {
+        height: 400px;
+    }
+}

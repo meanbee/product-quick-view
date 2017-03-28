@@ -49,9 +49,7 @@
 
             $.ajax( $productUrl ).done(function(response) {
                 $('.quick-view-canvas-inner').html(response.data);
-                this._resetModal();
                 $(this.options.selectors.quickViewModal).toggleClass(this.options.classNames.active.join(' '));
-
                 this._animateQuickView( $currentProduct );
             }.bind(this));
 
@@ -60,72 +58,7 @@
             $(this.options.selectors.quickViewModal).removeClass(this.options.classNames.active.join(' '));
         },
         _animateQuickView: function( $currentProduct ) {
-            var position = $currentProduct.position(),
-                leftStart = position.left,
-                topStart = position.top,
-
-                centerX = $( window ).width() / 2,
-                centerY = $( window ).height() / 2,
-
-                canvasWidth = this.$canvas.width() / 2,
-                canvasHeight = this.$canvas.height() / 2,
-
-                leftFinal = centerX - canvasWidth,
-                topFinal = centerY - canvasHeight;
-
-            console.log(centerX);
-
-            function quickViewAnimation() {
-                var leftTest = (leftStart + canvasWidth) < centerX,
-                    topTest = (topStart + canvasHeight) < centerY;
-
-                if(leftTest) {
-                    leftStart += 1; 
-                } else {
-                    leftStart -= 1;
-                }
-
-                if(topTest) {
-                    topStart += 1;
-                } else {
-                    topStart -= 1;
-                }
-
-                this.$canvas.css({
-                    'position': 'absolute',
-                    'left': leftStart + 'px',
-                    'top': topStart + 'px'
-                });
-
-                if(leftTest) {
-                    if ((leftStart < leftFinal)) {
-                        window.requestAnimationFrame(quickViewAnimation.bind(this));
-                    }
-                }
-
-                if(!leftTest) {
-                    if ((leftStart > leftFinal)) {
-                        window.requestAnimationFrame(quickViewAnimation.bind(this));
-                    }
-                }
-
-                if(topTest) {
-                    if ((topStart < topFinal)) {
-                        window.requestAnimationFrame(quickViewAnimation.bind(this));
-                    }
-                }
-
-                if(!topTest) {
-                    if ((topStart > topFinal)) {
-                        window.requestAnimationFrame(quickViewAnimation.bind(this));
-                    }
-                }
-            }
-
-            window.requestAnimationFrame(quickViewAnimation.bind(this));
-        },
-        _resetModal: function() {
-            this.$canvas.removeAttr("style");
+            console.log( 'test' );
         }
     } 
 
